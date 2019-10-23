@@ -1,5 +1,5 @@
 # MicroShop
-## MODX REVO | FormIt | AjaxForm | JS | jQuery | LocalStorage | BootStrap4 | FontAveasome 
+## MODX REVO | FormIt | AjaxForm | JS | jQuery | LocalStorage | BootStrap4 | FontAveasome
 > Магазин с хранением и обработкой товаров на стороне пользователя  
 > Подробности на [trywar.ru](https://trywar.ru/3/205/)
 
@@ -22,4 +22,43 @@ var oProduct = {
     img: $('.slider-catalog-item-nav .slick-slide:eq(0) img').attr('src'),
     name: $('.product_name_value').html(),
   }
+```
+
+#### shopkeeper3
+В файле _shopkeeper3.php_ лежит плагин для добавления товаров в shopkeeper3  
+Для прикручивания к shopkeeper3 так же понадобиться внести небольшие изменения в main.js,
+а именно, если товары с разными параметрами, нужно пихать к артикулу доп инфу, типа id параметра, и добавить чистый id товара, чтобы товары добавлялись по id но в корзине не дублировались.
+
+_Пример_
+```
+// Объект добавляемого товара
+var form = $(this).parents('form'),
+    size = form.find('[name^=size]:checked').val() ? form.find('[name^=size]:checked').val() : form.find('[name^=size]').val(),
+    oProduct = {
+      art: form.find('[name="shk-id"]').val(),
+      id: form.find('[name="shk-id"]').val(),
+      price: $(this).parents('.microshop_product').find('.shk-price').html(),
+      count: form.find('[name=count]').val(),
+      url: form.find('[name=url]').val(),
+      img: $(this).parents('.microshop_product').find('.shk-image').attr('src'),
+      name: form.find('[name="shk-name"]').val(),
+      size: size,
+    }
+
+if ( size ) {
+  // Артикул по цвету
+  oProduct['art'] = form.find('[name="shk-id"]').val() + size
+
+  // Размеры
+  if ( form.find('[name^=size]:checked').val() ) {
+    oProduct['size_val'] = $('[for="'+form.find('[name^=size]:checked').attr('id')+'"]').text()
+  }
+  else {
+    var oSize_val = JSON.parse( form.find('[name=product_sizes]').val() )
+    for (var key in oSize_val) {
+      oProduct['size_val'] = key
+      break
+    }
+  }
+}
 ```
