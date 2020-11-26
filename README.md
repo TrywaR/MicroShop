@@ -69,3 +69,37 @@ if ( size ) {
 * На ней форма со скрытым полем куда выгружает продукты MicroShop и сабмит "Оформить заказ", форма отправляет пост с товарами на страницу с формой оформления заказа shopkeeper3,
 * На странице с формой shopkeeper3 со скрытой её корзиной, но открытой форой заказа
 * При отрисовки скрытой корзины добавленный плагин _shopkeeper3.php_ добавляет товары в php сессию shopkeeper3
+
+
+### MiniShop2
+Оформление заказа в модальном окне
+
+```
+$(document).on('af_complete', function(event, response) {
+  var form = response.form
+  // Если у формы определённый id
+  if (form.attr('id') == 'form_order') {
+      // - Оформление заказа
+      var data = [
+        {name: 'ms2_action',   value: 'order/submit'}
+      ]
+      $.ajax({
+        type: "POST",
+        data: data,
+        url: '/assets/components/minishop2/action.php',
+        dataType: 'json',
+        success: function(data){
+          console.log(data)
+          order_success(data.data.msorder)
+        },
+        error: function (xhr, ajaxOptions, thrownError){
+          console.log(xhr.responseText);
+        }
+      });
+  }
+  // Иначе печатаем в консоль весь ответ
+  else {
+      console.log(response)
+  }
+})
+```
