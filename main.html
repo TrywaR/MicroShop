@@ -34,6 +34,29 @@
 </div>
 
 <form id="form_order" class="form_order col-12">
+  <!-- Товары -->
+  <div class="_block form_order_cart" id="msCart">
+    <div class="_title">
+      <h3>Корзина</h3>
+    </div>
+    <div class="table-responsive">
+      <table class="table table-striped">
+        <thead>
+          <tr class="header">
+            <th class="number text-center">№</th>
+            <th class="title">Наименование</th>
+            <th class="art text-center">Артикул</th>
+            <th class="price text-center">Цена</th>
+            <th class="count text-center">Количество</th>
+            <th class="remove"></th>
+          </tr>
+        </thead>
+      </table>
+    </div>
+
+    <input type="hidden" id="input_products" name="products" value="">
+  </div>
+  
   <!-- Инфа -->
   <div class="row _block">
     <div class="col-12 _title">
@@ -66,29 +89,6 @@
         </div>
       </div>
     </div>
-  </div>
-
-  <!-- Товары -->
-  <div class="_block form_order_cart" id="msCart">
-    <div class="_title">
-      <h3>Корзина</h3>
-    </div>
-    <div class="table-responsive">
-      <table class="table table-striped">
-        <thead>
-          <tr class="header">
-            <th class="number text-center">№</th>
-            <th class="title">Наименование</th>
-            <th class="art text-center">Артикул</th>
-            <th class="price text-center">Цена</th>
-            <th class="count text-center">Количество</th>
-            <th class="remove"></th>
-          </tr>
-        </thead>
-      </table>
-    </div>
-
-    <input type="hidden" id="input_products" name="products" value="">
   </div>
 
   <!-- Оформление -->

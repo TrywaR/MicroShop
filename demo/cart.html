@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="ru" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>MicroShop | Cart</title>
+
+    <!-- jquery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+
+    <!-- bootstrap -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha2/js/bootstrap.min.js" charset="utf-8"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha2/css/bootstrap.min.css">
+
+    <!-- font-awesome -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/js/all.min.js" charset="utf-8"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
+
+    <!-- jgrowl -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-jgrowl/1.4.7/jquery.jgrowl.min.js" charset="utf-8"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-jgrowl/1.4.7/jquery.jgrowl.min.css">
+
+    <!-- main -->
+    <script src="/main.js" charset="utf-8"></script>
+    <link rel="stylesheet" href="/main.css">
+  </head>
+  <body>
+    <header>
+      <div class="container mt-2">
+        <div class="row">
+          <div class="col-6">
+            <h1>MicroShop</h1>
+          </div>
+          <div class="col-6 text-right">
+            <a href="/" class="btn btn-primary btn-lg">
+              <i class="fas fa-arrow-circle-left"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </header>
+    <main>
+      <div class="container mt-5">
+        <div class="row">
+          <div class="form_order_null col-12">
+            <p class="text-center">
+              В корзине нет товаров
+            </p>
+          </div>
+
+          <div class="form_order_success col-12">
+            <h3 class="text-center">
+              Заказ успешно оформлен!
+            </h3>
+          </div>
+        </div>
+
+        <div class="row">
+          <form id="form_order" class="form_order col-12">
+            <!-- Товары -->
+            <div class="_block form_order_cart" id="msCart">
+              <div class="_title">
+                <h3>Корзина</h3>
+              </div>
+              <div class="table-responsive">
+                <table class="table table-striped">
+                  <thead>
+                    <tr class="header">
+                      <th class="number text-center">№</th>
+                      <th class="title">Наименование</th>
+                      <th class="art text-center">Артикул</th>
+                      <th class="price text-center">Цена</th>
+                      <th class="count text-center">Количество</th>
+                      <th class="remove"></th>
+                    </tr>
+                  </thead>
+                </table>
+              </div>
+
+              <input type="hidden" id="input_products" name="products" value="">
+            </div>
+
+            <!-- Инфа -->
+            <div class="row _block">
+              <div class="col-12 _title">
+                <h3>Оформление закза</h3>
+              </div>
+
+              <div class="col-12">
+                <div class="form-group row">
+                  <label for="input_fio" class="col-sm-3 col-form-label">ФИО</label>
+                  <div class="col-sm-9">
+                    <input type="text" name="fio" class="form-control" id="input_fio" aria-describedby="emailHelp" placeholder="ФИО">
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label for="input_tel" class="col-sm-3 col-form-label">Телефон</label>
+                  <div class="col-sm-9">
+                    <input type="text" name="tel" class="form-control" id="input_tel" placeholder="Телефон" required="required">
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label for="input_email" class="col-sm-3 col-form-label">Email</label>
+                  <div class="col-sm-9">
+                    <input type="text" name="email" class="form-control" id="input_email" placeholder="Email">
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label for="input_comment" class="col-sm-3 col-form-label">Комментарий</label>
+                  <div class="col-sm-9">
+                    <textarea name="comment" rows="3" class="form-control" id="input_comment" placeholder="Комментарий"></textarea>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Оформление -->
+            <div class="row _block">
+              <div class="col-12 mt-5 mb-2">
+                <div class="form-gorup text-right">
+                  <button type="submit" class="btn btn-success btn-lg">Оформить</button>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </main>
+    <footer>
+    </footer>
+  </body>
+</html>
