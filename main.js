@@ -167,36 +167,49 @@ $(document).find(button_add).on('click', function() {
 
 // - Удаление товара
 $(document).find(button_remove).on('click', function() {
-  if (localStorage.getItem('MicroShop')) {
-    // Объект удаляемого товара
-    var oProduct = {
-      art: $(this).data().atr
-    }
-
-    oProducts = JSON.parse(localStorage.getItem('MicroShop'))
-    $.each(oProducts.items, function(index, elem) {
-      if (oProducts.items.length == 1) {
-        // Если в корзине 1 продукт удаляем всё
-        localStorage.removeItem('MicroShop')
-        // Удаляем из таблицы
-        $('button[value="cart/remove"][data-atr="' + oProduct.art + '"]').parents('tr').remove()
-      } else {
-        // Если в корзине больше 1, ищём нужный
-        if (elem.art == oProduct.art) {
-          // Удаляем из корзины
-          oProducts.items.splice(index, 1)
-          localStorage.setItem('MicroShop', JSON.stringify(oProducts))
-
-          // Удаляем из таблицы
-          $('button[value="cart/remove"][data-atr="' + oProduct.art + '"]').parents('tr').remove()
-        }
-      }
-    })
-
+  if ( ! localStorage.getItem('MicroShop')) return false
+  // Объект удаляемого товара
+  var msOProduct = {
+    art: $(this).data().atr
   }
 
+  msOProducts = JSON.parse(localStorage.getItem('MicroShop'))
+  // msOProducts = JSON.parse(msOProducts.items)
+  msOProducts = msOProducts.items
+
+  if (msOProducts.length == 1) {
+
+    // Если в корзине 1 продукт удаляем всё
+    localStorage.removeItem('MicroShop')
+    // Удаляем из таблицы
+    $(button_remove + '[data-atr="' + msOProduct.art + '"]').parents('tr').remove()
+    cart_reload()
+
+  } else {
+
+    var index = 0
+    $.each(msOProducts, function() {
+      // console.log(index)
+      // console.log(elem)
+      // Если в корзине больше 1, ищём нужный
+      if (this.art == msOProduct.art) {
+        // Удаляем из корзины
+        msOProducts.splice(index, 1)
+        localStorage.setItem('MicroShop', JSON.stringify({
+          'items': msOProducts
+        }))
+
+        console.log(msOProducts)
+
+        // Удаляем из таблицы
+        $(button_remove + '[data-atr="' + msOProduct.art + '"]').parents('tr').remove()
+      }
+      index++
+    })
+    cart_reload()
+
+  }
   $.jGrowl("Товар удалён из корзины")
-  cart_reload()
   return false
 })
 

@@ -24,15 +24,23 @@ if ($modx->event->name == 'OnPageNotFound') {
           $result = $modx->query("SELECT * FROM `modx_shop_content` WHERE `id` = '" . $arrProduct['id'] . "'");
           if ( is_object($result) ) {
             $arrNewProduct = $result->fetch(PDO::FETCH_ASSOC);
-            // Достаём цену
             $arrNewProductPrice = 0;
-            $arrProductSizes = $arrNewProduct['size'];
-            $arrProductSizes = explode('||', $arrProductSizes);
-            foreach ($arrProductSizes as $arrProductSize) {
-              $arrNewProductSize = explode('==', $arrProductSize);
-              if ( $arrProduct['size'] == $arrNewProductSize[0] ) $arrNewProductPrice = $arrNewProductSize[1];
+
+            // Обновляем цену если она есть
+            if ( $arrNewProduct['price'] ) {
+              $arrNewProductPrice = $arrNewProduct['price'];
             }
-            // Обновляем цены
+            // Если конкретной цены нет, достаём цену в зависимсоти от размеров
+            else {
+              $arrProductSizes = $arrNewProduct['size'];
+              $arrProductSizes = explode('||', $arrProductSizes);
+              foreach ($arrProductSizes as $arrProductSize) {
+                $arrNewProductSize = explode('==', $arrProductSize);
+                // Если есть цена в зависимости от размера
+                if ( $arrProduct['size'] == $arrNewProductSize[0] && $arrNewProductSize[1] > 0 ) $arrNewProductPrice = $arrNewProductSize[1];
+              }
+            }
+
             if ( $arrNewProductPrice ) $arrProduct['price'] = $arrNewProductPrice;
             // Возвращяем обновлённый товар
           }
